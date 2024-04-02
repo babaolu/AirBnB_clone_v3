@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Index module """
 from api.v1.views import app_views
-from flask import jsonify, request
+from flask import abort, jsonify, request
 from models import storage
 from models.state import State
 
@@ -20,7 +20,7 @@ def states():
 @app_views.route("/states/<state_id>", methods=["GET"], strict_slashes=False)
 def state(state_id):
     """ Display state with specified id """
-    fstate = all_states.get("State." + state_id, None)
+    fstate = storage.get(State, state_id)
     if not fstate:
         abort(404)
     s_dict = {k: fstate.to_dict().get(k) for k in k_list}
@@ -31,10 +31,10 @@ def state(state_id):
                  strict_slashes=False)
 def del_state(state_id):
     """ Display state with specified id """
-    fstate = all_states.pop("State." + state_id, None)
+    fstate = storage.get(State, state_id)
     if not fstate:
         abort(404)
-    storage.delete(fstate)
+    fstate.delete()
     return jsonify({}), 200
 
 
@@ -55,7 +55,7 @@ def update_state(state_id):
     """ Updates specified state """
     if not request.json:
         abort(400, "Not a JSON")
-    fstate = all_states.get("State." + state_id, None)
+    fstate = storage.get(State, state_id)
     if not fstate:
         abort(404)
     for key, value in request.json.items():
