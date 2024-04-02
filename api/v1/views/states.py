@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Index module """
+""" The states module """
 from api.v1.views import app_views
 from flask import abort, jsonify, request
 from models import storage

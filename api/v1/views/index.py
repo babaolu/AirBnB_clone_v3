@@ -1,17 +1,17 @@
 #!/usr/bin/python3
-""" Index module """
+""" The index module """
 from api.v1.views import app_views
 from flask import jsonify
 from models import storage
 
 
-@app_views.route("/status")
+@app_views.route("/status", strict_slashes=False)
 def status():
-    """ Server status """
+    """ Returns server status """
     return jsonify({"status": "OK"})
 
 
-@app_views.route("/stats")
+@app_views.route("/stats", strict_slashes=False)
 def stats():
     """ Stats of each object type """
     all_stats = {
