@@ -6,7 +6,7 @@ from models import storage
 from models.user import User
 
 all_users = storage.all(User)
-k_list = ["__class__", "created_at", "id", "name", "updated_at"]
+k_list = ["__class__", "created_at", "email", "id", "password", "updated_at"]
 
 
 @app_views.route("/users", methods=["GET"], strict_slashes=False)

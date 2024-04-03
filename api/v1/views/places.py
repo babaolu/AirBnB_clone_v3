@@ -6,7 +6,8 @@ from models import storage
 from models.city import City
 from models.place import Place
 
-k_list = ["__class__", "created_at", "id", "name", "city_id", "updated_at"]
+k_list = ["__class__", "city_id", "created_at", "id", "name", "updated_at",
+          "user_id"]
 
 
 @app_views.route("/cities/<city_id>/places", methods=["GET"],
