@@ -50,7 +50,9 @@ class BaseModel:
     def __str__(self):
         """String representation of the BaseModel class"""
         return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id,
-                                         self.__dict__)
+                                         {k: v for k, v in
+                                          self.__dict__.items()
+                                          if k != "_sa_instance_state"})
 
     def save(self):
         """updates the attribute 'updated_at' with the current datetime"""
